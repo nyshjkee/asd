@@ -1,0 +1,71 @@
+#include <iostream>
+struct list
+{
+  int val;
+	list *next;
+};
+void print_list(list *);
+void delete_list(list *, list *);
+
+
+void main()
+{
+	list *El;
+	list *pEl = NULL;
+	int size;					/// number of elements
+
+	printf("Input number of elements: ");
+	scanf("%d", &size);
+
+	while (size--)				/// create elements of list
+	{
+		El = new list;
+		El->val = rand()%1000;
+		El->next = pEl;
+		pEl = El;
+	}
+	printf("...List was created...\n");
+
+
+	print_list(El);				/// print list
+	delete_list(pEl, El);		/// delete list
+
+	getchar();
+	getchar();
+}
+
+
+/*! @fn		void print_list(list *El)
+    @brief	Print list.
+    
+    @param *El	Pointer to first element of list.
+	@return		void
+*/
+void print_list(list *El)
+{
+	printf("\nList:\n");
+	while (El)
+	{
+		printf("|%d ", El->val);
+		El = El->next;
+	}
+}
+
+
+/*! @fn		void delete_list(list *pEl, list *El)
+    @brief	Delete list.
+    
+    @param *pEl		Pointer to pointer first element of list.
+    @param *El		Pointer to first element of list.
+	@return			void
+*/
+void delete_list(list *pEl, list *El)
+{
+	while (pEl)
+	{
+		El = pEl;
+		pEl = pEl->next;
+		delete El;
+	}
+	printf("\n\n...List was destroied...\n");
+}
